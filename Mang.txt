@@ -1,0 +1,288 @@
+#include <iostream>
+#define MAX 100
+using namespace std;
+
+// Hàm nhập mảng các số nguyên.
+
+/* Nếu để &n ở trong tham số của hàm NhapMang thì ta sẽ
+thực hiện nhập n ở ngay trong hàm. Còn nếu không để & thì ta sẽ
+nhập n ở trong hàm main.	*/
+void NhapMang(int a[], int &n)
+{
+	// Nhập số lượng phần tử của mảng.
+	do{
+		cout << "\nNhap vao so luong phan tu cua mang: ";
+		cin >> n;
+
+		if(n < 0 || n > MAX)
+		{
+			cout << "\nSo luong phan tu khong hop le. Xin kiem tra lai !";
+		}
+	}while(n < 0 || n > MAX); // Bị lặp lại.
+
+	// Duyệt vòng lặp để nhập từng giá trị cho mảng.
+	for(int i = 0; i < n; i++)
+	{
+		cout << "\nNhap vao a[" << i << "] = ";
+		cin >> a[i];
+	}
+}
+
+// Hàm xuất mảng.
+void XuatMang(int a[], int n)
+{
+	for(int i = 0; i < n; i++)
+	{
+		cout << a[i] << "   ";
+	}
+}
+
+// Hàm tìm kiếm xem 1 phần tử có nằm trong mảng hay không ? Trả về true nếu tìm thấy, ngược lại trả về false.
+bool TimKiem(int a[], int n, int x) // x là phần tử cần tìm kiếm.
+{
+	// Duyệt từng phần tử trong mảng đem so sánh với x.
+	for(int i = 0; i < n; i++)
+	{
+		// Liên tục kiểm tra.
+		if(a[i] == x)
+		{
+			return true; // Tìm thấy x.
+		}
+	}
+	return false; // Không tồn tại x trong mảng.
+}
+
+// Kiểm tra xem mảng có toàn số dương hay không. Trả về true nếu thỏa, ngược lại trả về false. => Cách 1.
+bool KiemTra_Cach1(int a[], int n)
+{
+	int dem = 0;
+	for(int i = 0; i < n; i++)
+	{
+		if(a[i] >= 0)
+		{
+			dem++; // Đếm liên tục tăng.
+		}
+	}
+
+	if(dem == n)
+	{
+		return true;
+	}
+	return false;
+}
+
+// Kiểm tra xem mảng có toàn số dương hay không. Trả về true nếu thỏa, ngược lại trả về false. => Cách 2.
+bool KiemTra_Cach2(int a[], int n)
+{
+	for(int i = 0; i < n; i++)
+	{
+		if(a[i] < 0)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+// Tách mảng.
+void TachMang(int a[], int n, int Temp[], int &nTemp)
+{
+	nTemp = 0;
+	// Duyệt mảng a để tìm ra các số âm lưu vào mảng Temp.
+	for(int i = 0; i < n; i++)
+	{
+		if(a[i] < 0)
+		{
+			Temp[nTemp++] = a[i]; // nTemp++ là toán tử hậu tố => sau khi nó được nhận vào a[i] thì nTemp mới tăng lên.
+			 
+			/* Tương đương như đoạn code sau:
+				Temp[nTemp] = a[i];
+				nTemp++;				*/
+		}
+	}
+}
+
+// Gộp mảng.
+void GopMang(int a[], int &n, int Temp[], int nTemp)
+{
+	n += nTemp; // Tăng số lượng phần tử của mảng a lên.
+
+	for(int i = n - nTemp; i < n; i++)
+	{
+		a[i] = Temp[i - (n - nTemp)];
+	}
+}
+
+// Tìm giá trị nhỏ nhất trong mảng.
+int TimMin(int a[], int n)
+{
+	int Min = a[0];
+
+	for(int i = 1; i < n; i++)
+	{
+		if(a[i] < Min)
+		{
+			Min = a[i];
+		}
+	}
+	return Min;
+}
+
+// Tìm giá trị lớn nhất trong mảng.
+int TimMax(int a[], int n)
+{
+	int Max = a[0];
+
+	for(int i = 1; i < n; i++)
+	{
+		if(a[i] > Max)
+		{
+			Max = a[i];
+		}
+	}
+	return Max;
+}
+
+// Hàm hoán vị 2 số nguyên.
+void HoanVi(int &x, int &y)
+{
+	int Temp = x;
+	x = y;
+	y = Temp;
+}
+
+// Hàm sắp xếp mảng tăng dần.
+void SapXepTangDan(int a[], int n)
+{
+	for(int i = 0; i < n - 1; i++)
+	{
+		for(int j = i + 1; j < n; j++)
+		{
+			if(a[i] > a[j])
+			{
+				HoanVi(a[i], a[j]);
+			}
+		}
+	}
+}
+
+// Hàm sắp xếp mảng giảm dần.
+void SapXepGiamDan(int a[], int n)
+{
+	for(int i = 0; i < n - 1; i++)
+	{
+		for(int j = i + 1; j < n; j++)
+		{
+			if(a[i] < a[j])
+			{
+				HoanVi(a[i], a[j]);
+			}
+		}
+	}
+}
+
+// Thêm 1 phần tử vào 1 vị trí trong mảng.
+void ThemPhanTu(int a[], int &n, int ViTriThem, int PhanTuThem)
+{
+	/* CHỌN THEO TAY TRÁI */
+
+	//for(int i = n; i >= ViTriThem + 1; i--)
+	//{
+	//	a[i] = a[i - 1];
+	//}
+	//n++; // Tăng số lượng phần tử lên.
+	//a[ViTriThem] = PhanTuThem;
+
+	/* CHỌN THEO TAY PHẢI */
+
+	for(int i = n - 1; i >= ViTriThem; i--)
+	{
+		a[i + 1] = a[i];
+	}
+	n++; // Tăng số lượng phần tử lên.
+	a[ViTriThem] = PhanTuThem;
+}
+
+// Xóa 1 phần tử tại 1 vị trí trong mảng. => Tự làm nhé ^^ !
+
+// Hàm chính.
+void main()
+{
+	int a[MAX]; // Khai báo mảng.
+	int n; // Số lượng phần tử của mảng.
+
+	NhapMang(a, n);
+	XuatMang(a, n);
+
+
+	int x;
+	cout << "\nNhap vao phan tu can tim kiem: ";
+	cin >> x;
+
+	bool Check = TimKiem(a, n, x); // Gọi lại hàm tìm kiếm.
+
+	// Kiểm tra - so sánh kết quả.
+	if(Check == true)
+	{
+		cout << "\nPhan tu " << x << " co ton tai trong mang";
+	}
+	else
+	{
+		cout << "\nPhan tu " << x << " khong ton tai trong mang";
+	}
+
+	bool KiemTraToanDuong = KiemTra_Cach2(a, n);
+
+	if(KiemTraToanDuong == true)
+	{
+		cout << "\nMang toan so duong";
+	}
+	else
+	{
+		cout << "\nMang co ton tai phan tu am";
+	}
+
+	int Temp[MAX], nTemp;
+	TachMang(a, n, Temp, nTemp);
+	cout << "\nMang Temp: \n";
+	XuatMang(Temp, nTemp);
+	GopMang(a, n, Temp, nTemp);
+	cout << "\nMang a ban dau la: \n";
+	XuatMang(a, n);
+
+	int Min = TimMin(a, n);
+	int Max = TimMax(a, n);
+	cout << "\nMin = " << Min;
+	cout << "\nMax = " << Max;
+
+	cout << "\n\n\t\t* Sap Xep Tang Dan *\n";
+	SapXepTangDan(a, n);
+	XuatMang(a, n);
+
+	cout << "\n\n\t\t* Sap Xep Giam Dan *\n";
+	SapXepGiamDan(a, n);
+	XuatMang(a, n);
+
+	int ViTriThem, PhanTuThem;
+
+	// Vị trí thêm hợp lệ là trong đoạn từ 0 --> n.
+	do{
+		cout << "\nNhap vao vi tri them: ";
+		cin >> ViTriThem;
+
+		if(ViTriThem < 0 || ViTriThem > n)
+		{
+			cout << "\nVi tri them khong hop le. Xin kiem tra lai !";
+		}
+	}while(ViTriThem < 0 || ViTriThem > n);
+
+	cout << "\nNhap vao phan tu them: ";
+	cin >> PhanTuThem;
+
+	ThemPhanTu(a, n, ViTriThem, PhanTuThem);
+
+	cout << "\nMang a sau khi them phan tu " << PhanTuThem << " vao vi tri " << ViTriThem << " la: \n";
+	XuatMang(a, n);
+
+	system("pause");
+}
