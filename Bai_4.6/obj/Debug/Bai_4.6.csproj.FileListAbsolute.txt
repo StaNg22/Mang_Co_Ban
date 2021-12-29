@@ -1,0 +1,8 @@
+D:\Bai_Hoc_Cua_Quyen\Bai_4.6\bin\Debug\Bai_4.6.exe.config
+D:\Bai_Hoc_Cua_Quyen\Bai_4.6\bin\Debug\Bai_4.6.exe
+D:\Bai_Hoc_Cua_Quyen\Bai_4.6\bin\Debug\Bai_4.6.pdb
+D:\Bai_Hoc_Cua_Quyen\Bai_4.6\obj\Debug\Bai_4.6.csproj.AssemblyReference.cache
+D:\Bai_Hoc_Cua_Quyen\Bai_4.6\obj\Debug\Bai_4.6.csproj.SuggestedBindingRedirects.cache
+D:\Bai_Hoc_Cua_Quyen\Bai_4.6\obj\Debug\Bai_4.6.csproj.CoreCompileInputs.cache
+D:\Bai_Hoc_Cua_Quyen\Bai_4.6\obj\Debug\Bai_4.6.exe
+D:\Bai_Hoc_Cua_Quyen\Bai_4.6\obj\Debug\Bai_4.6.pdb
